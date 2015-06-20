@@ -35,11 +35,13 @@ function exportCollection(desc, callback) {
 			});
 		},
 		function (next) {
-			console.log('----> dropping existing index [' + desc.index + ']');
-			elastic.indices.delete({index: desc.index}, function (err) {
-				var indexMissing = err && err.message.indexOf('IndexMissingException') === 0;
-				next(indexMissing ? null : err);
-			});
+			if(desc.dropExistingIndex) {
+				console.log('----> dropping existing index [' + desc.index + ']');
+				elastic.indices.delete({index: desc.index}, function (err) {
+					var indexMissing = err && err.message.indexOf('IndexMissingException') === 0;
+					next(indexMissing ? null : err);
+				});
+			}
 		},
 		function (next) {
 			console.log('----> creating new index [' + desc.index + ']');
