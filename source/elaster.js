@@ -94,7 +94,7 @@ function exportCollection(desc, callback) {
 				var me = this;
 
 				me.pause();
-				elastic.create({
+				elastic.index({
 					index: desc.index,
 					type: desc.type,
 					id: desc.docId(item),
