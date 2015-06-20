@@ -47,10 +47,15 @@ function exportCollection(desc, callback) {
 			}
 		},
 		function (next) {
-			console.log('----> creating new index [' + desc.index + ']');
-			elastic.indices.create({index: desc.index}, function (err) {
-				next(err);
-			});
+			if(desc.dropExistingIndex) {
+				console.log('----> creating new index [' + desc.index + ']');
+				elastic.indices.create({index: desc.index}, function (err) {
+					next(err);
+				});
+			}
+			else{
+				next(null);
+			}
 		},
 		function (next) {
 			console.log('----> initialize index mapping');
