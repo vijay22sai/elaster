@@ -40,7 +40,15 @@ module.exports = {
 					}
 				}
 			}
+		},
+		docId: function (item) {
+			return item._id.toString();
+		},
+		body: function(item){
+			delete item._id;
+			return item;
 		}
+
 	},
 	{
 		name: 'items',

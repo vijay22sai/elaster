@@ -61,7 +61,7 @@ function exportCollection(desc, callback) {
 			});
 		},
 		function (next) {
-			console.log('----> analizing collection [' + desc.name + ']');
+			console.log('----> analyzing collection [' + desc.name + ']');
 			collection.count(query, function (err, total) {
 				if (err) {
 					return next(err);
@@ -86,12 +86,11 @@ function exportCollection(desc, callback) {
 				var me = this;
 
 				me.pause();
-
 				elastic.create({
 					index: desc.index,
 					type: desc.type,
-					id: item._id.toString(),
-					body: item
+					id: desc.docId(item),
+					body: desc.body(item)
 				}, function (err) {
 					if (err) {
 						console.error(('failed to create document in elastic.').bold.red);
