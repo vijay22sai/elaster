@@ -42,6 +42,9 @@ function exportCollection(desc, callback) {
 					next(indexMissing ? null : err);
 				});
 			}
+			else{
+				next(null);
+			}
 		},
 		function (next) {
 			console.log('----> creating new index [' + desc.index + ']');
