@@ -14,6 +14,7 @@ module.exports = {
 	collections: [ {
 		name: 'collections',
 		index: 'collections',
+		dropExistingIndex: true,
 		type: 'collection',
 		fields: ['_id', 'public', 'title', 'description', 'user', 'userData'],
 		mappings: {
